@@ -1,0 +1,8 @@
+name: virtual_wallet_repository
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  virtual_wallet_core:
+    path: ../virtual_wallet_core
