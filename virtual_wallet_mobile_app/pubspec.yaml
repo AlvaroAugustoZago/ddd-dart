@@ -1,0 +1,32 @@
+name: virtual_wallet_mobile_app
+description: A new Flutter project.
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mobx: ^1.2.1+1
+  flutter_mobx: ^1.1.0+1
+  virtual_wallet_core:
+    path: ../virtual_wallet_core
+  virtual_wallet_query:
+    path: ../virtual_wallet_query
+  virtual_wallet_repository:
+    path: ../virtual_wallet_repository
+  
+  cupertino_icons: ^0.1.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^1.7.2
+  mobx_codegen: ^1.0.0
+
+flutter:
+  uses-material-design: true

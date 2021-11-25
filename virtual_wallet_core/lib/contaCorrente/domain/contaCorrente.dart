@@ -1,6 +1,3 @@
-import 'package:meta/meta.dart';
-
-import '../../cliente/domain/cliente.dart';
 import 'contaCorrente.id.dart';
 import 'contaCorrenteStatus.dart';
 import 'credito.dart';
@@ -10,16 +7,13 @@ import 'transacao.dart';
 import '../../infra/money/money.dart';
 import '../../infra/money/positiveMoney.dart';
 
-@immutable
 class ContaCorrente {
   final ContaCorrenteId id;
   final DateTime dataAbertura;
-  final Cliente cliente;
   final List<Transacao> extrato;
   Status status;
 
-  ContaCorrente(
-      this.id, this.dataAbertura, this.cliente, this.extrato, this.status);
+  ContaCorrente(this.id, this.dataAbertura, this.extrato, this.status);
 
   void depositar(Credito credito) {
     this.extrato.add(credito);
@@ -35,6 +29,7 @@ class ContaCorrente {
   void fechar() {
     if (saldo().equals(Money(0))) {
       this.status = Status.Fechada;
+      return;
     }
     throw new ContaFechadaComSaldo();
   }
@@ -46,14 +41,12 @@ class ContaCorrente {
         .reduce((value, quantia) => quantia.add(value).toMoney());
   }
 
-  static ContaCorrente from(
-      DateTime dataAbertura, Cliente cliente, List<Transacao> extrato) {
-    return new ContaCorrente(
-        ContaCorrenteId.novo(), dataAbertura, cliente, extrato, Status.Aberto);
+  static ContaCorrente nova() {
+    return from(DateTime.now(), List.empty());
   }
 
-  static ContaCorrente of(Cliente cliente) {
-    return new ContaCorrente(ContaCorrenteId.novo(), DateTime.now(), cliente,
-        List.empty(), Status.Aberto);
+  static ContaCorrente from(DateTime dataAbertura, List<Transacao> extrato) {
+    return new ContaCorrente(
+        ContaCorrenteId.novo(), dataAbertura, extrato, Status.Aberto);
   }
 }

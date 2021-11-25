@@ -1,5 +1,4 @@
 import '../domain/contaCorrente.dart';
-import '../domain/contaCorrente.id.dart';
 import '../domain/contaCorrente.repository.dart';
 import '../domain/credito.dart';
 import 'cmd/depositar.cmd.dart';
@@ -12,8 +11,8 @@ class ContaCorrenteService {
 
   ContaCorrenteService(this.repository);
 
-  ContaCorrenteId registrar(RegistrarNovaConta cmd) {
-    return repository.save(ContaCorrente.of(cmd.cliente)).id;
+  ContaCorrente registrar(RegistrarNovaConta cmd) {
+    return repository.save(ContaCorrente.nova());
   }
 
   void depositar(Depositar cmd) {

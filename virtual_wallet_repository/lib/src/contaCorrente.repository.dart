@@ -1,3 +1,4 @@
+import 'package:virtual_wallet_core/contaCorrente/domain/contaCorrente.id.dart';
 import 'package:virtual_wallet_core/virtual_wallet_core.dart';
 
 class ContaCorrenteRepositoryInMemory implements ContaCorrenteRepository {
@@ -8,9 +9,6 @@ class ContaCorrenteRepositoryInMemory implements ContaCorrenteRepository {
   }
 
   ContaCorrente getById(ContaCorrenteId contaCorrenteId) {
-    return this
-        .contas
-        .where((conta) => conta.id.equal(contaCorrenteId))
-        .first();
+    return this.contas.where((conta) => conta.id == contaCorrenteId).first;
   }
 }
